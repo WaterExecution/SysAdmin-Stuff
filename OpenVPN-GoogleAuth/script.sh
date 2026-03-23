@@ -78,7 +78,7 @@ fi
 echo "--- 5. Finalizing 2FA Directory & Restart ---"
 # Creates the secret storage directory with restricted permissions
 sudo mkdir -p $TFA_DIR
-sudo chown nobody:nogroup $TFA_DIR
+sudo chown root:root $TFA_DIR
 sudo chmod 700 $TFA_DIR
 
 # Restarts the OpenVPN service to apply all changes
