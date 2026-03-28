@@ -1,56 +1,49 @@
 # TeamCity Installation 
 
-Click on "Upgrade your existing TeamCity installation":
+Click on "Upgrade your existing TeamCity installation":\
 ![](images/DownloadTeamcity.png)
 - https://www.jetbrains.com/teamcity/download/
 
-Download the latest exe
+Download the latest exe:\
 ![](images/Latestteamcity.png)
 
-Click next until the agent and server is installing:
+Click next until the agent and server is installing:\
 ![](images/installingteamcity.png)
 
-Rename the name to anything or leave it as the hostname then click `save`:
+Rename the name to anything or leave it as the hostname then click `save`:\
 ![](images/agentconfig.png)
 
-Select SYSTEM account unless you have a different use case:
+Select SYSTEM account unless you have a different use case:\
 ![](images/systemaccount.png)
 
-Click on `Proceed` -> `Proceed` -> `Accept`
+Click on `Proceed` -> `Proceed` -> `Accept`\
 ![](images/tc-firststart.png)
 
 # Setting up TeamCity
 
-Create your administrator account:
+Create your administrator account:\
 ![](images/createadmin.png)
 
 ## Creating project
 
-Create a new project and select `GitLab` > `GitLab CE/EE`:
+Create a new project and select `GitLab` > `GitLab CE/EE`:\
 ![](images/settingupgitlabfortc.png)
 
 **GitLab is required to be set up to continue**
 
-Go to `User settings` -> select `Applications` > `Add new application`:
+Go to `User settings` -> select `Applications` > `Add new application`:\
 ![](images/createapplicationtoken.png)
 
-For this example, just provide all the permissions and click `Save application`: 
-![](images/applicationapi.png)
-![](images/applicationtoken.png)
-Fill the configuration from the GitLab and click `add`:
-![](images/applicationconnection.png)
-Create a blank project in GitLab:
-![](images/createproject-2.png)
-Connect the project in TeamCity:
+For this example, just provide all the permissions and click `Save application`:\
+![](images/applicationapi.png)\
+![](images/applicationtoken.png)\
+Fill the configuration from the GitLab and click `add`:\
+![](images/applicationconnection.png)\
+Create a blank project in GitLab:\
+![](images/createproject-2.png)\
+Connect the project in TeamCity:\
 ![](images/connectproject-1.png)
 
-## Build Project
-Download .NET on your "agent" to build the application (https://visualstudio.microsoft.com/downloads/)
-
-Once your agent is able to build, open `Build Steps` and click `Auto-detect build steps`:
-![](images/autobuild.png)
-If you try building now, it will not provide the artifact, Click on `Edit` to add the artifacts:
-![](images/artifacts.png)
 # GitLab Installation (WSL)
 
 ```bash
@@ -82,38 +75,38 @@ services:
     shm_size: '256m
 ```
 
-Run gitlab server and wait for a bit for the server to load:
+Run gitlab server and wait for a bit for the server to load:\
 ```bash
 docker compose up -d
 ```
 
-Locate generated password for root:
+Locate generated password for root:\
 ```bash
 docker exec -it gitlab grep 'Password:' /etc/gitlab/initial_root_password
 ```
 
-Login with root:\<password\> at `http://localhost`
+Login with root:\<password\> at `http://localhost`\
 ![](images/logintogitlab.png)
 
 # Setting up GitLab
 
 ## Creating user
 
-Open admin panel:
+Open admin panel:\
 ![](images/admin.png)
 
-Go to users tab:
+Go to users tab:\
 ![](images/clickusers.png)
 
 Click `add user`
-Add the user details (Use a temporary email)
-Click `Create User`
+Add the user details (Use a temporary email)\
+Click `Create User`\
 ![](images/creating%20user.png)
 
-After creating use click `Edit`:
+After creating use click `Edit`:\
 ![](images/settingpassword.png)
 
-Logout and login with the created user (Will be prompt to reset password):
+Logout and login with the created user (Will be prompt to reset password):\
 ![](images/loggedinuser.png)
 
 ## Creating dotnet project
@@ -122,7 +115,7 @@ Logout and login with the created user (Will be prompt to reset password):
 
 ![](images/createdemoproject.png)
 
-Create a dotnet application and push to GitLab:
+Create a dotnet application and push to GitLab:\
 ```powershell
 mkdir test
 cd test
@@ -135,7 +128,7 @@ git commit -m "v1.0"
 git push -uf origin main
 ```
 
-The git push will be rejected:
+The git push will be rejected:\
 ```powershell
 C:\Users\user\Desktop\test>git push -uf origin main
 Enumerating objects: 10, done.
@@ -151,10 +144,18 @@ error: failed to push some refs to 'http://localhost/user/test.git'
 ```
 
 The main branch is protected, as a temporary solution, just unprotect it.
-Go to Project settings > `Repository` > `Protected branches` > `Unprotect`:
+Go to Project settings > `Repository` > `Protected branches` > `Unprotect`:\
 ![](images/unprotect.png)
 
-Git push again, it should now work:
+Git push again, it should now work:\
 ```
 git push -uf origin main
 ```
+
+# Building Your First Project
+Download .NET on your "agent" to build the application (https://visualstudio.microsoft.com/downloads/)
+
+Once your agent is able to build, open `Build Steps` and click `Auto-detect build steps`:\
+![](images/autobuild.png)\
+If you try building now, it will not provide the artifact, Click on `Edit` to add the artifacts:\
+![](images/artifacts.png)
