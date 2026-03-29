@@ -46,6 +46,8 @@ auth-user-pass
 `sudo chown root:root /etc/openvpn/2fa/user`\
 `sudo chmod 400 /etc/openvpn/2fa/user`
 
+Add the user to your system, if you have multiple clients.
+
 sudo nano /etc/pam.d/openvpn
 ```bash
 auth required pam_google_authenticator.so secret=/etc/openvpn/2fa/${USER} user=root
